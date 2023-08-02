@@ -3,49 +3,57 @@ import styled from "styled-components/native";
 import { useState } from "react";
 import Header from "../../components/header";
 import axios from "axios";
-import { Alert } from "react-native";
+import { Alert, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 interface GitUser {
   avatar_url: string;
   name: string;
   login: string;
   location: string;
-
+  id: number;
+  followers: number;
+  public_repos: number;
 }
 
 export default function Home() {
+  const navigation = useNavigation();
   const [name, setName] = useState("");
-  const [user, setUser] = useState<GitUser>({ 
-    avatar_url: '',
-    name: '',
-    login: '',
-    location: '',
+  const [user, setUser] = useState<GitUser>({
+    avatar_url: "",
+    name: "",
+    login: "",
+    location: "",
+    id: 0,
+    followers: 0,
+    public_repos: 0,
   }); // Precisa ser coletado > E que no resultado apareça a foto, o nome, o login e a localização.
 
   async function getUser() {
-    if(name == ""){
-      Alert.alert("Error","Digite um nome antes de buscar")
-    }else{
+    if (name == "") {
+      Alert.alert("Error", "Digite um nome antes de buscar");
+    } else {
       const url = `https://api.github.com/users/${name}`;
-    
+
       try {
         const response = await axios.get(url);
         setUser(response.data);
         console.log(response.data);
       } catch (error) {
-        Alert.alert("Error",`O usuário "${name}" não foi encontrado.`)
-        console.log('Erro ao buscar usuário:', error);
-        setUser({ 
-          avatar_url: '',
-          name: '',
-          login: '',
-          location: '',
+        Alert.alert("Error", `O usuário "${name}" não foi encontrado.`);
+        console.log("Erro ao buscar usuário:", error);
+        setUser({
+          avatar_url: "",
+          name: "",
+          login: "",
+          location: "",
+          id: 0,
+          followers: 0,
+          public_repos: 0,
         });
       }
     }
-   
   }
-  
 
   return (
     <Main>
@@ -63,7 +71,11 @@ export default function Home() {
         </FormButton>
         <ResultBox>
           <ImageBox>
-            <UserImage source={{ uri: user.avatar_url }} />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Profile", { user })}
+            >
+              <UserImage source={{ uri: user.avatar_url }} />
+            </TouchableOpacity>
           </ImageBox>
 
           <InfoBox>
@@ -72,7 +84,7 @@ export default function Home() {
             <UserLocation>{user.location}</UserLocation>
           </InfoBox>
         </ResultBox>
-        <ListButton onPress={() => getUser()}>
+        <ListButton>
           <ButtonText>Histórico de busca</ButtonText>
         </ListButton>
       </FormBox>
@@ -82,14 +94,12 @@ export default function Home() {
 
 const Main = styled.View`
   display: flex;
-  
 `;
 const FormBox = styled.View`
   display: flex;
   align-items: center;
   margin-top: 20px;
-  justify-content:center;
- 
+  justify-content: center;
 `;
 
 const InputName = styled.Text`
@@ -139,13 +149,13 @@ const ResultBox = styled.View`
   flex-direction: row;
   width: 80%;
   height: 300px;
-  
-  border-radius:15px;
+
+  border-radius: 15px;
 `;
 const InfoBox = styled.View`
   display: flex;
-  justify-content:center;
-  margin-left:25px;
+  justify-content: center;
+  margin-left: 25px;
 `;
 const ImageBox = styled.View`
   margin-left: 10px;
