@@ -105,13 +105,14 @@ const ProfileBox = styled.View`
   justify-content:center;
   align-items: center;
   width: 95%;
-  height: 42%;
+  height: 45%;
   background-color: #081e4a;
   border-radius: 20px;
 `;
 const ProfileInfo = styled.View`
+  display:flex;
+  justify-content:center;
   width: 95%;
-  border-radius: 15px;
   height: 95%;
 `;
 const ImageBox = styled.View`
@@ -172,9 +173,9 @@ const UserReps = styled.Text`
   padding-left: 5px;
 `;
 const UserImage = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
 `;
 const InfoBox = styled.View`
   display: flex;
@@ -187,7 +188,7 @@ const RepsBox = styled.View`
   width: 95%;
   background-color: #081e4a;
   border-radius: 20px;
-  height: 42%;
+  height: 39%;
 `;
 
 const Reps = styled.View`

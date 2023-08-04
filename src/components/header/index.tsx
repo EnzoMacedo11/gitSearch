@@ -15,7 +15,7 @@ margin-top:15px;
   align-items: center;
   background-color: #001f3f;
   width: 100%;
-  height: 47px;
+  height: 45px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 `;
