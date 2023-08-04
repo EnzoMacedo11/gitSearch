@@ -2,7 +2,9 @@ import styled from "styled-components/native";
 import Header from "../../components/header";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView,TouchableHighlight, Linking } from "react-native";
+
+
 
 export default function Profile({ route }: { route: any }) {
   const { user } = route.params;
@@ -14,7 +16,6 @@ export default function Profile({ route }: { route: any }) {
 
   async function getRepo() {
     const url = user.repos_url;
-    console.log("AQUI", url);
     try {
       const response = await axios.get(url);
       setRepos(response.data);
@@ -49,7 +50,11 @@ export default function Profile({ route }: { route: any }) {
             <Center>
               <RepoText>Repositórios</RepoText>
               {Object.values(repos).map((r: any) => (
-                <Reps key={r.id}>
+                <TouchableHighlight
+                key={r.id}
+                onPress={() => Linking.openURL(r.html_url)}
+              >
+                <Reps>
                   <RepoInfo>Nome: {r.name}</RepoInfo>
                   <RepoInfo>Linguagem: {r.language}</RepoInfo>
                   <RepoInfo>Descrição: {r.description}</RepoInfo>
@@ -57,10 +62,10 @@ export default function Profile({ route }: { route: any }) {
                     Criado em: {new Date(r.created_at).toLocaleString("pt-BR")}
                   </RepoInfo>
                   <RepoInfo>
-                    Último push em:{" "}
-                    {new Date(r.pushed_at).toLocaleString("pt-BR")}
+                    Último push em: {new Date(r.pushed_at).toLocaleString("pt-BR")}
                   </RepoInfo>
                 </Reps>
+              </TouchableHighlight>
               ))}
             </Center>
             </ScrollView>
@@ -89,7 +94,8 @@ const RepoText = styled.Text`
 `;
 
 const RepoInfo = styled.Text`
-  font-size: 15px;
+  margin-left:3px;
+  font-size: 14px;
   margin-bottom: 5px;
   width: 92%;
   color: white;
@@ -183,18 +189,18 @@ const RepsBox = styled.View`
   width: 95%;
   background-color: #081e4a;
   border-radius: 20px;
-  height:250px;
+  height:255px;
 `;
 
 const Reps = styled.View`
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 80%;
+ margin-top:5px;
+  max-width: 75%;
+  height:200px;
   background-color: #1e5a94;
-  margin: 15px auto;
-  padding: 15px;
   border-radius: 15px;
+  margin-bottom:5px;
 `;
 
 const Center = styled.View`

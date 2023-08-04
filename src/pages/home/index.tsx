@@ -1,10 +1,11 @@
 import styled from "styled-components/native";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Header from "../../components/header";
 import axios from "axios";
 import { Alert, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../../context/userContext";
 
 interface GitUser {
   avatar_url: string;
@@ -19,6 +20,7 @@ interface GitUser {
 export default function Home() {
   const navigation = useNavigation();
   const [name, setName] = useState("");
+  const {setUserList} = useContext(UserContext)
   const [user, setUser] = useState<GitUser>({
     avatar_url: "",
     name: "",
@@ -38,6 +40,7 @@ export default function Home() {
       try {
         const response = await axios.get(url);
         setUser(response.data);
+        setUserList((prevUserList) => [...prevUserList, response.data]);
         console.log(response.data);
       } catch (error) {
         Alert.alert("Error", `O usuário "${name}" não foi encontrado.`);
@@ -69,22 +72,26 @@ export default function Home() {
         <FormButton onPress={() => getUser()}>
           <ButtonText>Buscar</ButtonText>
         </FormButton>
-        <ResultBox>
-          <ImageBox>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Profile", { user })}
-            >
-              <UserImage source={{ uri: user.avatar_url }} />
-            </TouchableOpacity>
-          </ImageBox>
+       <ResultBox>
+          {user.avatar_url ? (
+            <>
+              <ImageBox>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Profile", { user })}
+                >
+                  <UserImage source={{ uri: user.avatar_url }} />
+                </TouchableOpacity>
+              </ImageBox>
 
-          <InfoBox>
-            <UserName>{user.name}</UserName>
-            <UserLogin>{user.login}</UserLogin>
-            <UserLocation>{user.location}</UserLocation>
-          </InfoBox>
+              <InfoBox>
+                <UserName>{user.name}</UserName>
+                <UserLogin>{user.login}</UserLogin>
+                <UserLocation>{user.location}</UserLocation>
+              </InfoBox>
+            </>
+          ) : null}
         </ResultBox>
-        <ListButton>
+        <ListButton onPress={() => navigation.navigate("History")}>
           <ButtonText>Histórico de busca</ButtonText>
         </ListButton>
       </FormBox>
