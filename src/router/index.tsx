@@ -5,11 +5,14 @@ import Home from '../pages/home';
 import Profile from '../pages/profile';
 import UserProvider from '../context/userContext';
 import History from '../pages/history';
+import { StatusBar } from 'expo-status-bar';
 const Stack = createNativeStackNavigator();
 
 export default function Router() {
   return (
+   
     <NavigationContainer>
+       
       <UserProvider>
       <Stack.Navigator
         screenOptions={{

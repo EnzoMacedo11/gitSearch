@@ -46,6 +46,8 @@ export default function History() {
 
 const Main = styled.View`
   display: flex;
+  width: 100%;
+  height: 100%;
 `;
 const Title = styled.Text`
   margin-top: 15px;
@@ -57,7 +59,7 @@ const Container = styled.View`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 90%;
 `;
 const ResultBox = styled.View`
   margin-top: 10px;

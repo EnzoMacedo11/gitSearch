@@ -6,6 +6,7 @@ import axios from "axios";
 import { Alert, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../../context/userContext";
+import { StatusBar } from "expo-status-bar";
 
 interface GitUser {
   avatar_url: string;
@@ -60,6 +61,7 @@ export default function Home() {
 
   return (
     <Main>
+       <StatusBar backgroundColor="#001f3f"/>
       <Header />
       <FormBox>
         <InputName> Digite o Nome do Usuário</InputName>
@@ -136,7 +138,7 @@ const FormButton = styled.TouchableOpacity`
 `;
 
 const ListButton = styled.TouchableOpacity`
-  margin-top: 80px;
+  margin-top: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,12 +153,11 @@ const ButtonText = styled.Text`
 `;
 
 const ResultBox = styled.View`
-  margin-top: 25px;
+  margin-top: 35px;
   display: flex;
   flex-direction: row;
   width: 80%;
-  height: 300px;
-
+  height: 45%;
   border-radius: 15px;
 `;
 const InfoBox = styled.View`

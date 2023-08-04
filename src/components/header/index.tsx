@@ -1,29 +1,25 @@
-import { Text, View,StyleSheet } from "react-native";
+import styled from "styled-components/native";
 
-
-export default function Header(){
-    return(
-        <View style={styles.container}>
-            <Text style={styles.logo}>GitSearch</Text>
-        </View>
-    )
+export default function Header() {
+  return (
+    <Main >
+      <Logo >GitSearch</Logo>
+    </Main>
+  );
 }
 
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor:"#001f3f",
-        width:"100%",
-        height:60,
-        alignItems:"center",
-        justifyContent:"center",
-        borderBottomLeftRadius:3,
-        borderBottomRightRadius:3,
-        marginTop:25
-    },
-
-    logo:{
-        fontSize:20,
-        fontWeight:"bold",
-        color:"#ffff"
-    }
-})
+const Main = styled.View`
+margin-top:15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #001f3f;
+  width: 100%;
+  height: 47px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+`;
+const Logo = styled.Text`
+  font-size: 20;
+  color: #ffff;
+`;

@@ -2,9 +2,7 @@ import styled from "styled-components/native";
 import Header from "../../components/header";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ScrollView,TouchableHighlight, Linking } from "react-native";
-
-
+import { ScrollView, TouchableHighlight, Linking } from "react-native";
 
 export default function Profile({ route }: { route: any }) {
   const { user } = route.params;
@@ -45,12 +43,12 @@ export default function Profile({ route }: { route: any }) {
           </InfoBox>
         </ProfileInfo>
       </ProfileBox>
-          <RepsBox>
-          <ScrollView >
-            <Center>
-              <RepoText>Repositórios</RepoText>
-              {Object.values(repos).map((r: any) => (
-                <TouchableHighlight
+      <RepsBox>
+        <ScrollView>
+          <Center>
+            <RepoText>Repositórios</RepoText>
+            {Object.values(repos).map((r: any) => (
+              <TouchableHighlight
                 key={r.id}
                 onPress={() => Linking.openURL(r.html_url)}
               >
@@ -62,14 +60,15 @@ export default function Profile({ route }: { route: any }) {
                     Criado em: {new Date(r.created_at).toLocaleString("pt-BR")}
                   </RepoInfo>
                   <RepoInfo>
-                    Último push em: {new Date(r.pushed_at).toLocaleString("pt-BR")}
+                    Último push em:{" "}
+                    {new Date(r.pushed_at).toLocaleString("pt-BR")}
                   </RepoInfo>
                 </Reps>
               </TouchableHighlight>
-              ))}
-            </Center>
-            </ScrollView>
-          </RepsBox>
+            ))}
+          </Center>
+        </ScrollView>
+      </RepsBox>
     </Main>
   );
 }
@@ -94,7 +93,7 @@ const RepoText = styled.Text`
 `;
 
 const RepoInfo = styled.Text`
-  margin-left:3px;
+  margin-left: 3px;
   font-size: 14px;
   margin-bottom: 5px;
   width: 92%;
@@ -103,29 +102,28 @@ const RepoInfo = styled.Text`
 const ProfileBox = styled.View`
   margin-top: 5px;
   display: flex;
+  justify-content:center;
   align-items: center;
   width: 95%;
-  height: 310px;
+  height: 42%;
   background-color: #081e4a;
   border-radius: 20px;
 `;
 const ProfileInfo = styled.View`
-  margin-top: 5px;
   width: 95%;
   border-radius: 15px;
-  border: 2px solid black;
-  height: 302px;
+  height: 95%;
 `;
 const ImageBox = styled.View`
-  margin-top: 5px;
+  margin-top: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 const UserName = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
@@ -134,7 +132,7 @@ const UserName = styled.Text`
 `;
 
 const UserLogin = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
@@ -142,7 +140,7 @@ const UserLogin = styled.Text`
   padding-left: 5px;
 `;
 const UserLocation = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
@@ -150,7 +148,7 @@ const UserLocation = styled.Text`
   padding-left: 5px;
 `;
 const UserID = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
@@ -158,7 +156,7 @@ const UserID = styled.Text`
   padding-left: 5px;
 `;
 const UserFollowers = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
@@ -166,7 +164,7 @@ const UserFollowers = styled.Text`
   padding-left: 5px;
 `;
 const UserReps = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
@@ -174,9 +172,9 @@ const UserReps = styled.Text`
   padding-left: 5px;
 `;
 const UserImage = styled.Image`
-  width: 120px;
-  height: 120px;
-  border-radius: 60px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 `;
 const InfoBox = styled.View`
   display: flex;
@@ -189,18 +187,18 @@ const RepsBox = styled.View`
   width: 95%;
   background-color: #081e4a;
   border-radius: 20px;
-  height:255px;
+  height: 42%;
 `;
 
 const Reps = styled.View`
   display: flex;
   justify-content: center;
- margin-top:5px;
+  margin-top: 5px;
   max-width: 75%;
-  height:200px;
+  height: 200px;
   background-color: #1e5a94;
   border-radius: 15px;
-  margin-bottom:5px;
+  margin-bottom: 5px;
 `;
 
 const Center = styled.View`
@@ -208,4 +206,3 @@ const Center = styled.View`
   align-items: center;
   flex-direction: column;
 `;
-
