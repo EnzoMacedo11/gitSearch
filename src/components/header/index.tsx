@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import { StyleSheet } from "react-native";
+import { Text, View,StyleSheet } from "react-native";
+
 
 export default function Header(){
     return(
@@ -11,7 +11,7 @@ export default function Header(){
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"#001F3F",
+        backgroundColor:"#001f3f",
         width:"100%",
         height:60,
         alignItems:"center",

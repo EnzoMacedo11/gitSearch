@@ -165,14 +165,14 @@ const ImageBox = styled.View`
 `;
 
 const UserName = styled.Text`
-  font-size: 18;
+  font-size: 18px;
 `;
 
 const UserLogin = styled.Text`
-  font-size: 18;
+  font-size: 18px;
 `;
 const UserLocation = styled.Text`
-  font-size: 18;
+  font-size: 18px;
 `;
 const UserImage = styled.Image`
   width: 100px;
